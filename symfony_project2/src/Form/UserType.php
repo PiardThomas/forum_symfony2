@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
 class UserType extends AbstractType
 {
@@ -14,7 +15,7 @@ class UserType extends AbstractType
         $builder
             ->add('pseudo')
             ->add('passwd')
-            ->add('date')
+            ->add('date', BirthdayType::class)
             ->add('about')
             ->add('messages')
             ->add('themes')

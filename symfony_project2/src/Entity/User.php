@@ -47,12 +47,12 @@ class User
     /**
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="user")
      */
-    private $message;
+    private $messages;
 
     public function __construct()
     {
         $this->themes = new ArrayCollection();
-        $this->message = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -141,14 +141,14 @@ class User
     /**
      * @return Collection|Message[]
      */
-    public function getMessage(): Collection
+    public function getMessages(): Collection
     {
-        return $this->message;
+        return $this->messages;
     }
 
     public function addMessage(Message $message): self
     {
-        if (!$this->message->contains($message)) {
+        if (!$this->messages->contains($message)) {
             $this->message[] = $message;
             $message->setUser($this);
         }
@@ -158,7 +158,7 @@ class User
 
     public function removeMessage(Message $message): self
     {
-        if ($this->message->removeElement($message)) {
+        if ($this->messages->removeElement($message)) {
             // set the owning side to null (unless already changed)
             if ($message->getUser() === $this) {
                 $message->setUser(null);
@@ -166,5 +166,9 @@ class User
         }
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->pseudo ;
     }
 }
